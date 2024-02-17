@@ -1,0 +1,68 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+#container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+.navbar {
+    background-color: #1da1f2;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-brand {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+}
+.navbar-links {
+    display: flex;
+    gap: 20px;
+}
+.navbar-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+.tweet {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+.tweet img {
+    width: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.tweet .tweet-content {
+    display: flex;
+    align-items: center;
+}
+.tweet .tweet-content .username {
+    font-weight: bold;
+}
+.tweet .tweet-content .handle {
+    color: #777;
+}
+.tweet .tweet-text {
+    margin-top: 10px;
+}
+.tweet .tweet-actions {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.tweet .tweet-actions span {
+    color: #777;
+    cursor: pointer;
+}

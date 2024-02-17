@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Twitter-like Layout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        #container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .navbar {
+            background-color: #1da1f2;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 20px;
+        }
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+        .search-bar {
+            display: flex;
+            align-items: center;
+        }
+        .search-bar input[type="text"] {
+            padding: 8px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+        }
+        .search-bar button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .search-icon {
+            color: #fff;
+            font-size: 18px;
+        }
+        .tweet {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .tweet img {
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .tweet .tweet-content {
+            display: flex;
+            align-items: center;
+        }
+        .tweet .tweet-content .username {
+            font-weight: bold;
+        }
+        .tweet .tweet-content .handle {
+            color: #777;
+        }
+        .tweet .tweet-text {
+            margin-top: 10px;
+        }
+        .tweet .tweet-actions {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .tweet .tweet-actions span {
+            color: #777;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    {% comment %} {% extends "navigation.html" %} {% endcomment %}
+    <div class="navbar">
+        <div class="navbar-brand">Rate My Date</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Find Your Date...">
+            <button type="submit" class="search-icon"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="navbar-links">
+            <a href="/">Home</a>
+            <a href="person">Explore</a>
+            <a href="#">Notifications</a>
+            <a href="#">Review</a>
+        </div>
+    </div>
+    <div id="container">
+        <div class="tweet">
+            <div class="tweet-content">
+                <img src="../static/images/anonymous_user.jpg" alt="Profile Picture">
+                <div>
+                    <div class="username">John Doe</div>
+                    <div class="handle">@johndoe</div>
+                </div>
+            </div>
+            <div class="tweet-text">
+                This is feedback! 
+            </div>
+            <div class="tweet-actions">
+                <span>Agree</span>
+                <span>Disagree</span>
+                <span>Comment</span>
+            </div>
+        </div>
+
+        <!-- More tweets can be added similarly -->
+        
+    </div>
+   
+</body>
+</html>
