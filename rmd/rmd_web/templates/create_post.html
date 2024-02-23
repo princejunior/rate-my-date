@@ -1,0 +1,26 @@
+{% extends "master.html" %}
+
+{% block title %}
+Create Post
+{% endblock %}
+
+
+{% block content %}
+<h1>Create a New Post</h1>
+    <form method="post" >
+        {% csrf_token %}
+        <label for="person_id">Person ID:</label><br>
+        <input type="text" id="person_id" name="person_id"><br><br>
+        
+        <label for="person_firstname">First Name:</label><br>
+        <input type="text" id="person_firstname" name="person_firstname"><br><br>
+        
+        <label for="person_lastname">Last Name:</label><br>
+        <input type="text" id="person_lastname" name="person_lastname"><br><br>
+
+        <label for="post">Post:</label><br>
+        <textarea id="post" name="post" rows="4" cols="50"></textarea><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends "master.html" %}
+
+{% block title %}
+Create New Person
+{% endblock %}
+
+
+{% block content %}
+<form method="post" action="{% url 'create_person' %}">
+    {% csrf_token %}
+    <label for="first_name">First Name:</label>
+    <input type="text" id="first_name" name="first_name" required>
+    
+    <label for="last_name">Last Name:</label>
+    <input type="text" id="last_name" name="last_name" required>
+    
+    <label for="instagram">Instagram Account:</label>
+    <input type="text" id="instagram" name="instagram">
+    
+    <!-- Hidden input field for joined_date -->
+    <input type="hidden" id="joined_date" name="joined_date" value="{{ current_date }}"> 
+
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}

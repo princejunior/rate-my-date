@@ -1,0 +1,32 @@
+{% extends "master.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+{% block content %}
+<h1>Login</h1>
+<form method="post" id="loginForm">
+  {% csrf_token %}
+  {{ loginform.as_p }}
+  <div class="form-group">
+    <label for="remember_me">Remember Me:</label>
+    <input type="checkbox" id="remember_me" name="remember_me">
+  </div>
+  <button type="submit" class="btn btn-primary">Login</button>
+</form>
+<p>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
+
+<!-- Debugging: Display user information -->
+{% if user.is_authenticated %}
+  <p>User is logged in: {{ user.username }}</p>
+{% else %}
+  <p>No user is logged in</p>
+{% endif %}
+{% endblock content %}
+

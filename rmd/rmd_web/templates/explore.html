@@ -1,0 +1,62 @@
+{% extends "master.html" %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+    }
+    .tweet-container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .tweet {
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    .profile-info {
+        margin-bottom: 10px;
+    }
+    .profile-info p {
+        margin: 5px 0;
+    }
+    .tweet-date {
+        font-size: 12px;
+        color: #777;
+    }
+</style>
+{% block title %}
+Explore
+{% endblock %}
+
+{% comment %} {% block content %}
+<ul>
+  {% for person in persons %}
+    <li>{{ person.firstname }} {{ person.lastname }}</li>
+  {% endfor %}
+</ul>
+{% endblock %} {% endcomment %}
+
+    
+{% block content %}
+<div class="tweet-container">
+    <ul>
+        {% for person in persons %}
+        <div class="tweet">
+            <div class="profile-info">
+                <p><strong>First Name: </strong>{{ person.firstname }}</p>
+                <p><strong>Last Name: </strong> {{ person.lastname }}</p>
+                <p><strong>Instagram: </strong> @{{ person.istagram_account }}</p>
+            </div>
+            {% comment %} <p class="tweet-date">{{ person.joined_date}}</p> {% endcomment %}
+        </div>
+    {% endfor %}
+</ul>
+</div>
+
+{% endblock %}
+

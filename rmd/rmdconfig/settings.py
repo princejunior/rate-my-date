@@ -59,6 +59,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'rmd_web.context_processors.user_context',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -72,8 +73,19 @@ WSGI_APPLICATION = 'rmdconfig.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+# AWS
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',
+#         'USER': 'masteruser',
+#         'PASSWORD': '12345678',
+#         'HOST': 'w3-django-project.c5ui02w4i1m6.us-east-2.rds.amazonaws.com',
+#         'PORT': '5432'
+#     }
+# }
 
+# LOCAL HOST
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

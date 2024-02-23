@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+{% extends "master.html" %}
+
+{% block title %}
+Person Profile
+{% endblock %}
+
+{% block content %}
+<div class="container-dpp">
+    <h1 class="h1-dpp">User Profile</h1>
+    <div class="profile-info-dpp">
+        <label>Name:</label>
+        <p>{{ person.first_name }} {{ person.last_name }}</p>
+    </div>
+    <div class="profile-info-dpp">
+        <label>Instagram:</label>
+        <p>{{ person.instagram }}</p>
+    </div>
+
+    <div class="posts-section-dpp">
+        <h2>Create a post</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" required></textarea>
+            <!-- Include any other fields from your PostForm here -->
+            <button type="submit">Post</button>
+        </form>
+
+        <hr>
+        <h2>Posts</h2>
+        {% for post in person.post_set.all %}
+        <div class="comment-dpp">
+            <img class="comment-avatar-dpp" src="../static/images/anonymous_user.jpg" alt="Avatar">
+            <div class="comment-content-dpp">
+                <div class="comment-header-dpp">
+                    <span>{{ post.user.username }}</span>
+                    <span>@{{ post.user.username }}</span>
+                    <span>{{ post.created_at|date:"F d, Y H:i" }}</span> <!-- Format the created date -->
+                </div>
+                <div class="comment-text-dpp">{{ post.content }}</div>
+                <div class="comment-actions-dpp">
+                    <span>Agree: {{ post.agree }}</span>
+                    <span>Disagree: {{ post.disagree }}</span>
+                    <span>Comments: {{ post.comments }}</span>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No posts found for this person.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% comment %} STATIC {% endcomment %}
+{% comment %} {% block content %}
+<div class="container-dpp">
+    <h1 class="h1-dpp">User Profile</h1>
+    <div class="profile-info-dpp">
+        <label>Name:</label>
+        <p>John Doe</p>
+    </div>
+    <div class="profile-info-dpp">
+        <label>Instagram:</label>
+        <p>@johndoe123</p>
+    </div>
+
+    <div class="comments-section-dpp">
+        <h2>Write a comment</h2>
+        <textarea placeholder="Write a comment..."></textarea>
+        <button>Post Comment</button>
+        <hr>
+        <h2>Comments</h2>
+        <div class="comment-dpp">
+            <img class="comment-avatar-dpp" src="../static/images/anonymous_user.jpg" alt="Avatar">
+            <div class="comment-content-dpp">
+                <div class="comment-header-dpp">
+                    <span>User123</span>
+                    <span>@user123</span>
+                </div>
+                <div class="comment-text-dpp">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                <div class="comment-actions-dpp">
+                    <span>Agree: 10</span>
+                    <span>Disagree: 5</span>
+                    <span>Comments: 3</span>
+                </div>
+            </div>
+        </div>
+        <div class="commen-dpp">
+            <img class="comment-avatar-dpp" src="../static/images/anonymous_user.jpg" alt="Avatar">
+            <div class="comment-content-dpp">
+                <div class="comment-header-dpp">
+                    <span>User456</span>
+                    <span>@user456</span>
+                </div>
+                <div class="comment-text-dpp">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
+                <div class="comment-actions-dpp">
+                    <span>Agree: 15</span>
+                    <span>Disagree: 3</span>
+                    <span>Comments: 7</span>
+                </div>
+            </div>
+        </div>
+        <!-- Add more comments as needed -->
+    </div>
+</div>
+{% endblock %}
+     {% endcomment %}
