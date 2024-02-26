@@ -1,4 +1,5 @@
 {% extends "master.html" %}
+{% load static %}
 
 {% block title %}
 Rate My Date
@@ -7,29 +8,109 @@ Rate My Date
 
 {% block content %}
 <div id="container">
+    {% for post in recent_posts %}
     <div class="tweet">
         <div class="tweet-content">
-            <img src="../static/images/anonymous_user.jpg" alt="Profile Picture">
+            <!-- Display user's profile picture -->
+            <img src="{% static '/images/anonymous_user.jpg' %}" alt="Profile Picture">
             <div>
-                <div class="username">John Doe</div>
-                <div class="handle">@johndoe</div>
+                <div class="username">{{ post.person.first_name }} {{ post.person.last_name }}</div>
             </div>
         </div>
         <div class="tweet-text">
-            This is feedback! 
+            {{ post.content }}
+            <label>How was the date set up:</label><br>
+            {% if post.how_met == "Bumble"%}
+                <label class="icon-label" for="bumble"><img src="{% static '/images/bumble_icon.png' %}" alt="Facebook Icon"></label><br>
+            {% elif post.how_met == "Hinge"%}
+                <label class="icon-label" for="hinge"><img src="{% static '/images/hinge_icon.png' %}" alt="Facebook Icon"></label><br>
+            {% elif post.how_met == "Mutual"%}
+                <label class="icon-label" for="mutual"><img src="{% static '/images/mutual_icon.png' %}" alt="Facebook Icon"></label><br>
+            {% elif post.how_met == "Instagram"%}
+                <label class="icon-label" for="instagram"><img src="{% static '/images/instagram_icon.png' %}" alt="Instagram Icon"></label>
+            {% elif post.how_met == "Facebook"%}
+                <label class="icon-label" for="facebook"><img src="{% static '/images/facebook_icon.png' %}" alt="Facebook Icon"></label>
+            {% elif post.how_met == "Twitter"%}
+                <label class="icon-label" for="twitter"><img src="{% static '/images/twitter_x_icon.png' %}" alt="Twitter Icon"></label>
+            {% else %}
+                <label class="icon-label" for="in_person"><img src="{% static '/images/anonymous_user.jpg' %}" alt="In Person Icon"></label><br>
+            {% endif %}
         </div>
         <div class="tweet-actions">
-            <span>Agree</span>
-            <span>Disagree</span>
+            <!-- Agree Button -->
+            <button type="button" class="agree-btn" data-post-id="{{ post.id }}">{{ post.agree }} Agree</button>
+            <!-- Disagree Button -->
+            <button type="button" class="disagree-btn" data-post-id="{{ post.id }}">{{ post.disagree }} Disagree</button>
+            <!-- Comment Section -->
+            <div class="comment-section">
+                <button type="button" class="toggle-comments" data-post-id="{{ post.id }}">View Comments</button>
+                <div class="comments" style="display: none;">
+                    <!-- Display Comments Here -->
+                    <!-- Form to Add Comment -->
+                    <form class="add-comment-form" action="{% url 'add_comment' %}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ post.id }}">
+                        <textarea name="comment" placeholder="Add a comment"></textarea>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<script>
+    // Function to handle Agree and Disagree buttons
+    document.querySelectorAll('.agree-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const postId = button.dataset.postId;
+            // Implement logic to handle agree action
+            console.log(`Agree clicked for post ${postId}`);
+        });
+    });
+
+    document.querySelectorAll('.disagree-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const postId = button.dataset.postId;
+            // Implement logic to handle disagree action
+            console.log(`Disagree clicked for post ${postId}`);
+        });
+    });
+
+    // Function to handle toggling comments
+    document.querySelectorAll('.toggle-comments').forEach(button => {
+        button.addEventListener('click', () => {
+            const postId = button.dataset.postId;
+            const commentsDiv = document.querySelector(`.comments[data-post-id="${postId}"]`);
+            commentsDiv.style.display = commentsDiv.style.display === 'none' ? 'block' : 'none';
+        });
+    });
+</script>
+
+{% endblock %}
+
+
+{% comment %} {% block content %}
+<div id="container">
+    {% for post in recent_posts %}
+    <div class="tweet">
+        <div class="tweet-content">
+            <!-- Display user's profile picture -->
+            <img src="../static/images/anonymous_user.jpg" alt="Profile Picture">
+            <div>
+                <div class="username">{{ post.person.first_name }} {{ post.person.last_name }}</div> <!-- Display the username of the post author -->
+            </div>
+        </div>
+        <div class="tweet-text">
+            {{ post.content }} <!-- Display the content of the post -->
+        </div>
+        <div class="tweet-actions">
+            <span>Agree: {{ post.agree }}</span> <!-- Display the number of agrees -->
+            <span>Disagree: {{ post.disagree }}</span> <!-- Display the number of disagrees -->
+            <!-- You can add more actions as needed -->
             <span>Comment</span>
         </div>
     </div>
-    {% if user.is_authenticated %}
-  <p>User is logged in: {{ user.username }}</p>
-{% else %}
-  <p>No user is logged in</p>
-{% endif %}
-
+    {% endfor %}
 </div>
-
-{% endblock %}
+{% endblock %} {% endcomment %}

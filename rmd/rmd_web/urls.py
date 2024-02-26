@@ -14,7 +14,7 @@ urlpatterns = [
     path('viewperson/', views.view_person, name='viewperson'),
     path('viewperson/<int:person_id>/', views.view_person, name='viewperson'),
     path('create_post/<int:person_id>/', views.create_post, name='create_post'),
-    
+    path('add_comment/', views.add_comment, name='add_comment'),
     
     
     

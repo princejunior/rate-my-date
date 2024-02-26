@@ -9,7 +9,7 @@ from django.forms.widgets import PasswordInput, TextInput
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['user', 'person', 'content', 'how_met']
+        fields = ['content', 'how_met']
 
 # Creates a Profile for the date 
 class PersonForm(forms.ModelForm):

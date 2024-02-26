@@ -1,10 +1,12 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+    <title>{% block title %}{% endblock %}</title>
   <style>
     body {
         font-family: Arial, sans-serif;
@@ -317,15 +319,18 @@
     <div class="navbar">
         <div class="navbar-brand"> <a href="/">Rate My Date</a></div>
         <div class="search-bar">
-            <input type="text" placeholder="Find Your Date...">
-            <button type="submit" class="search-icon"><i class="fas fa-search"></i></button>
-        </div>
+            <form method="GET" action="{% url 'searchperson' %}">
+                <input type="text" name="query" placeholder="Find Your Date...">
+                <button type="submit" class="search-icon"><i class="fas fa-search"></i></button>
+            </form>
+        </div>        
         <div class="navbar-links">
             <a href="/">Home</a>
             {% comment %} <a href="{% url 'search' %}">Search</a> {% endcomment %}
             <a href="/search">Search</a>
-            <a href="/viewperson">Notifications</a>
-            <a href="/create_person">Create Date</a>
+            {% comment %} <a href="/viewperson">Notifications</a> {% endcomment %}
+            {% comment %} <a href="/viewperson">Notifications</a> {% endcomment %}
+            <a href="/explore">Explore</a>
             {% if user.is_authenticated %}
                 <a href="/user-logout">Logout</a>
             {% else %}

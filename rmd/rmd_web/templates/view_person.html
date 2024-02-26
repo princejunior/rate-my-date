@@ -1,61 +1,140 @@
-<!DOCTYPE html>
 {% extends "master.html" %}
+{% load static %}
 
 {% block title %}
 Person Profile
 {% endblock %}
 
 {% block content %}
+<link rel="stylesheet" href="{% static '/css/view_person.css' %}">
 <div class="container-dpp">
-    <h1 class="h1-dpp">User Profile</h1>
+    <!-- Back button -->
+    <button class="btn btn-secondary" id="backButton">Back</button>
+    <h1 class="h1-dpp">{{ person.first_name }} {{ person.last_name }}'s Profile</h1>
     <div class="profile-info-dpp">
         <label>Name:</label>
         <p>{{ person.first_name }} {{ person.last_name }}</p>
     </div>
     <div class="profile-info-dpp">
         <label>Instagram:</label>
+        {% comment %} <label class="icon-label" for="instagram"><img src="{% static '/images/instagram_icon.png' %}" alt="Instagram Icon"></label> {% endcomment %}
+
         <p>{{ person.instagram }}</p>
     </div>
 
     <div class="posts-section-dpp">
         <h2>Create a post</h2>
-        <form method="post">
+        <form method="post" action="{% url 'viewperson' person_id=person.id %}">
             {% csrf_token %}
-            <label for="content">Content:</label>
-            <textarea id="content" name="content" required></textarea>
-            <!-- Include any other fields from your PostForm here -->
-            <button type="submit">Post</button>
-        </form>
-
-        <hr>
-        <h2>Posts</h2>
-        {% for post in person.post_set.all %}
-        <div class="comment-dpp">
-            <img class="comment-avatar-dpp" src="../static/images/anonymous_user.jpg" alt="Avatar">
-            <div class="comment-content-dpp">
-                <div class="comment-header-dpp">
-                    <span>{{ post.user.username }}</span>
-                    <span>@{{ post.user.username }}</span>
-                    <span>{{ post.created_at|date:"F d, Y H:i" }}</span> <!-- Format the created date -->
+            <div class="form-group">
+                <label for="content">Your Review:</label><br>
+                <textarea id="content" name="content" required></textarea>
+            </div>
+        
+            <div class="form-group">
+                <label>How was the date set up:</label><br>
+                
+                
+            </div>
+        
+            <div class="social-media-section form-group">
+                <h3>Social Media</h3>
+                <!-- Social media checkboxes and icons here -->
+                <div class="checkbox-label">
+                    <input type="radio" id="instagram" name="how_met" value="Instagram">
+                    {% comment %} <input type="checkbox" id="instagram" name="how_met" value="Instagram"> {% endcomment %}
+                    <label class="icon-label" for="instagram"><img src="{% static '/images/instagram_icon.png' %}" alt="Instagram Icon"></label>
                 </div>
-                <div class="comment-text-dpp">{{ post.content }}</div>
-                <div class="comment-actions-dpp">
-                    <span>Agree: {{ post.agree }}</span>
-                    <span>Disagree: {{ post.disagree }}</span>
-                    <span>Comments: {{ post.comments }}</span>
+                <div class="checkbox-label">
+                    <input type="radio" id="facebook" name="how_met" value="Facebook">
+                    {% comment %} <input type="checkbox" id="facebook" name="how_met" value="Facebook"> {% endcomment %}
+                    <label class="icon-label" for="facebook"><img src="{% static '/images/facebook_icon.png' %}" alt="Facebook Icon"></label>
+                </div>
+                <div class="checkbox-label">
+                    <input type="radio" id="twitter" name="how_met" value="Twitter">
+                    {% comment %} <input type="checkbox" id="twitter" name="how_met" value="Twitter"> {% endcomment %}
+                    <label class="icon-label" for="twitter"><img src="{% static '/images/twitter_x_icon.png' %}" alt="Twitter Icon"></label>
                 </div>
             </div>
+        
+            <div class="dating-platforms-section form-group">
+                <h3>Dating Platforms</h3>
+                <!-- Dating platforms checkboxes and icons here -->
+                <div class="checkbox-label">
+                <input type="radio" id="hinge" name="how_met" value="Hinge">
+                {% comment %} <input type="checkbox" id="hinge" name="how_met" value="Hinge"> {% endcomment %}
+                <label class="icon-label" for="hinge"><img src="{% static '/images/hinge_icon.png' %}" alt="Facebook Icon"></label><br>
+            </div>
+                <div class="checkbox-label">
+                <input type="radio" id="mutual" name="how_met" value="Mutual">
+                {% comment %} <input type="checkbox" id="mutual" name="how_met" value="Mutual"> {% endcomment %}
+                <label class="icon-label" for="mutual"><img src="{% static '/images/mutual_icon.png' %}" alt="Facebook Icon"></label><br>
+            </div>
+                <div class="checkbox-label">
+                <input type="radio" id="bumble" name="how_met" value="Bumble">
+                {% comment %} <input type="checkbox" id="bumble" name="how_met" value="Bumble"> {% endcomment %}
+                <label class="icon-label" for="bumble"><img src="{% static '/images/bumble_icon.png' %}" alt="Facebook Icon"></label><br>
+            </div>
+                <div class="checkbox-label">
+                <input type="radio" id="in_person" name="how_met" value="In Person">
+                {% comment %} <input type="checkbox" id="in_person" name="how_met" value="In Person"> {% endcomment %}
+                <label class="icon-label" for="in_person"><img src="{% static '/images/anonymous_user.jpg' %}" alt="In Person Icon"></label><br>
+            </div>
+            </div>
+        
+            <button type="submit">Post</button>
+        </form>
+        
+        <hr>
+        <h2>Posts</h2>
+        {% for post in recent_posts %}
+    <div class="tweet">
+        <div class="tweet-content">
+            <!-- Display user's profile picture -->
+            <img src="{% static '/images/anonymous_user.jpg'%}" alt="Profile Picture">
+            <div>
+                {% comment %} <div class="username">{{ post.person.first_name }} {{ post.person.last_name }}</div> <!-- Display the username of the post author --> {% endcomment %}
+                <!-- Optionally, you can display the handle if available -->
+                <!-- <div class="handle">@johndoe</div> -->
+            </div>
         </div>
-        {% empty %}
-        <p>No posts found for this person.</p>
-        {% endfor %}
+        <div class="tweet-text">
+            {{ post.content }} <!-- Display the content of the post -->
+            <label>How was the date set up:</label><br>
+            {% if post.how_met == "Bumble"%}
+                <label class="icon-label" for="bumble"><img src="{% static '/images/bumble_icon.png' %}" alt="Facebook Icon"></label><br>
+            {% elif post.how_met == "Hinge"%}
+                <label class="icon-label" for="hinge"><img src="{% static '/images/hinge_icon.png' %}" alt="Facebook Icon"></label><br>
+            {% elif post.how_met == "Mutual"%}
+                <label class="icon-label" for="mutual"><img src="{% static '/images/mutual_icon.png' %}" alt="Facebook Icon"></label><br>
+            {% elif post.how_met == "Instagram"%}
+                <label class="icon-label" for="instagram"><img src="{% static '/images/instagram_icon.png' %}" alt="Instagram Icon"></label>
+            {% elif post.how_met == "Facebook"%}
+                <label class="icon-label" for="facebook"><img src="{% static '/images/facebook_icon.png' %}" alt="Facebook Icon"></label>
+            {% elif post.how_met == "Twitter"%}
+                <label class="icon-label" for="twitter"><img src="{% static '/images/twitter_x_icon.png' %}" alt="Twitter Icon"></label>
+            {% else %}
+                <label class="icon-label" for="in_person"><img src="{% static '/images/anonymous_user.jpg' %}" alt="In Person Icon"></label><br>
+            {% endif %}
+        </div>
+        <div class="tweet-actions">
+            <span>Agree: {{ post.agree }}</span> <!-- Display the number of agrees -->
+            <span>Disagree: {{ post.disagree }}</span> <!-- Display the number of disagrees -->
+            <!-- You can add more actions as needed -->
+            <span>Comment</span>
+        </div>
+    </div>
+    {% endfor %}
     </div>
 </div>
+
+<!-- JavaScript for back button -->
+<script>
+    document.getElementById("backButton").addEventListener("click", function() {
+        window.history.back();  // Navigate back to the previous page
+    });
+</script>
 {% endblock %}
-
-
-
-
 
 
 

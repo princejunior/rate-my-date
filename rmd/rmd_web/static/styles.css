@@ -9,6 +9,8 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
+
+/* {% comment %} Navigation Bar {% endcomment %} */
 .navbar {
     background-color: #1da1f2;
     color: #fff;
@@ -21,7 +23,12 @@ body {
     font-size: 24px;
     font-weight: bold;
     text-decoration: none;
+   
+}
+.navbar-brand a {
     color: #fff;
+    text-decoration: none;
+    
 }
 .navbar-links {
     display: flex;
@@ -32,6 +39,27 @@ body {
     text-decoration: none;
     font-size: 16px;
 }
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+.search-bar input[type="text"] {
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+.search-bar button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.search-icon {
+    color: #fff;
+    font-size: 18px;
+}
+/* {% comment %} Twitter tweet {% endcomment %} */
 .tweet {
     background-color: #fff;
     border-radius: 10px;
@@ -66,3 +94,212 @@ body {
     color: #777;
     cursor: pointer;
 }
+
+/* {% comment %} Create New Person (cnp) {% endcomment %} */
+.container-cnp-form {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1.h1-cnp {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form-group-cnp {
+    margin-bottom: 20px;
+}
+.form-group-cnp label {
+    font-weight: bold;
+}
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+.form-group input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.form-group input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+/* {% comment %} search page (sp) {% endcomment %} */
+.container-sp {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.h1-sp {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.search-results-sp {
+    margin-bottom: 20px;
+}
+.search-results-sp h2 {
+    margin-bottom: 10px;
+}
+.user-profile-sp {
+    margin-bottom: 20px;
+}
+.user-profile-sp h3 {
+    margin-bottom: 10px;
+}
+.user-profile-sp p {
+    margin-bottom: 5px;
+}
+.not-found-sp {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.not-found-sp p {
+    margin-bottom: 10px;
+}
+.create-profile-btn-sp {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+.create-profile-btn-sp:hover {
+    background-color: #0056b3;
+}
+
+/* {% comment %} Display Person's profile (dpp) {% endcomment %} */
+.container-dpp {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.h1-dpp {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.profile-info-dpp {
+    margin-bottom: 20px;
+}
+.profile-info-dpp label {
+    font-weight: bold;
+}
+.comments-section-dpp {
+    margin-top: 30px;
+    border-top: 2px solid #ccc;
+    padding-top: 20px;
+}
+.comment-dpp {
+    display: flex;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+.comment-avatar-dpp {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.comment-content-dpp {
+    flex: 1;
+}
+.comment-header-dpp {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+.comment-header-dpp span {
+    font-weight: bold;
+    margin-right: 5px;
+}
+.comment-text-dpp {
+    word-wrap: break-word;
+    margin-bottom: 5px;
+}
+.comment-actions-dpp {
+    font-size: 12px;
+    color: #777;
+    display: flex;
+    align-items: center;
+}
+.comment-actions-dpp span {
+    margin-right: 10px;
+}
+.comment-dpp textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+.comment-dpp button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100px;
+    text-align: center;
+    align-self: flex-end;
+}
+.comment-dpp button:hover {
+    background-color: #0056b3;
+}
+
+/* {% comment %} Login {% endcomment %} */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.button-login {
+    background-color: #1da1f2;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button-login:hover {
+    background-color: #0f86d1;
+}
+
+.p-login {
+    margin-top: 20px;
+}
+
+.p-login a {
+    color: #1da1f2;
+    text-decoration: none;
+}
+
+.p-login a:hover {
+    text-decoration: underline;
+} 

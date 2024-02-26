@@ -48,15 +48,18 @@ Explore
         {% for person in persons %}
         <div class="tweet">
             <div class="profile-info">
-                <p><strong>First Name: </strong>{{ person.firstname }}</p>
-                <p><strong>Last Name: </strong> {{ person.lastname }}</p>
-                <p><strong>Instagram: </strong> @{{ person.istagram_account }}</p>
+                <p><strong>First Name: </strong>{{ person.first_name }}</p>
+                <p><strong>Last Name: </strong> {{ person.last_name }}</p>
+                <p><strong>Instagram: </strong> @{{ person.instagram }}</p>
             </div>
-            {% comment %} <p class="tweet-date">{{ person.joined_date}}</p> {% endcomment %}
+            <!-- Add the View Profile button -->
+            <a href="{% url 'viewperson' person_id=person.id %}" class="btn btn-primary">View Profile</a>
         </div>
-    {% endfor %}
-</ul>
+        {% endfor %}
+    </ul>
 </div>
-
 {% endblock %}
+
+
+
 

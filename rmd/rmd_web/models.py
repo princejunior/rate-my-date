@@ -34,9 +34,19 @@ class Post(models.Model):
 #     agree = models.IntegerField(null=True)
 #     disagree = models.IntegerField(null=True)
 #     comments = models.CharField(max_length=255)
-    
+
+# class Comment(models.Model):
+#     post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comments')
+#     comment_date_created = models.DateTimeField(auto_now_add=True)
+#     content = models.TextField()
+#     agree = models.PositiveIntegerField(default=0)
+#     disagree = models.PositiveIntegerField(default=0)
+
+#     class Meta:
+#         ordering = ['-comment_date_created']
+
 class Comment(models.Model):
-    post_id = models.IntegerField(null=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True)
     comment_date_created = models.DateField(null=True)
     agree = models.CharField(max_length=255)
     disagree = models.IntegerField(null=True)

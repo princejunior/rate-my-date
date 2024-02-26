@@ -1,0 +1,15 @@
+{% extends "master.html" %}
+
+{% block title %}
+Create Comment
+{% endblock %}
+
+
+<form method="post" action="{% url 'viewperson' person_id=person.id %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="content">Your Comment:</label><br>
+        <textarea id="content" name="content" required></textarea>
+    </div>
+    <button type="submit">Post</button>
+</form>
