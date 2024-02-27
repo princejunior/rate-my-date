@@ -98,8 +98,11 @@ Person Profile
                 <!-- <div class="handle">@johndoe</div> -->
             </div>
         </div>
+        
         <div class="tweet-text">
+            <label>Review:</label>
             {{ post.content }} <!-- Display the content of the post -->
+            <br>
             <label>How was the date set up:</label><br>
             {% if post.how_met == "Bumble"%}
                 <label class="icon-label" for="bumble"><img src="{% static '/images/bumble_icon.png' %}" alt="Facebook Icon"></label><br>
@@ -117,12 +120,12 @@ Person Profile
                 <label class="icon-label" for="in_person"><img src="{% static '/images/anonymous_user.jpg' %}" alt="In Person Icon"></label><br>
             {% endif %}
         </div>
-        <div class="tweet-actions">
+        {% comment %} <div class="tweet-actions">
             <span>Agree: {{ post.agree }}</span> <!-- Display the number of agrees -->
             <span>Disagree: {{ post.disagree }}</span> <!-- Display the number of disagrees -->
             <!-- You can add more actions as needed -->
             <span>Comment</span>
-        </div>
+        </div> {% endcomment %}
     </div>
     {% endfor %}
     </div>

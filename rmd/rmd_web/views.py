@@ -49,6 +49,7 @@ def createNewPerson(request):
 
 @login_required
 def view_person(request, person_id):
+   
     person = get_object_or_404(Person, pk=person_id)
     recent_posts = Post.objects.filter(person=person).order_by('-created_at')
     
@@ -75,7 +76,8 @@ def view_person(request, person_id):
         'recent_posts': recent_posts
     }
     return render(request, 'view_person.html', context=context)
-
+    
+        
 @login_required
 def add_comment(request):
     if request.method == 'POST':

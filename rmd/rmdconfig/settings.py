@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'rmdconfig.urls'
@@ -79,8 +80,8 @@ WSGI_APPLICATION = 'rmdconfig.wsgi.application'
 #         'ENGINE': 'django.db.backends.postgresql',
 #         'NAME': 'postgres',
 #         'USER': 'masteruser',
-#         'PASSWORD': '12345678',
-#         'HOST': 'w3-django-project.c5ui02w4i1m6.us-east-2.rds.amazonaws.com',
+#         'PASSWORD': 'BuzzBunny101!',
+#         'HOST': 'rate-my-date.c3ssg8sue7fy.us-east-1.rds.amazonaws.com',
 #         'PORT': '5432'
 #     }
 # }
@@ -127,6 +128,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
+
+
+STATIC_ROOT = BASE_DIR / 'productionfiles'
 
 STATIC_URL = 'static/'
 
