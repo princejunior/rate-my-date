@@ -6,7 +6,6 @@ Why a Software Engineer:
 
 - I'm passionate about working on startup business concepts and transforming them into tangible realities. By coding, I give life to ideas, providing them with a platform to flourish and thrive. I enjoy exploring various programming languages and integrating them into my projects and ideas. 
 
-{Provide a description the web app that you wrote. Describe how to start a test server on your computer and what website to open up to see the first page of the app.}
 Description:
 - This software application allows the user to give a review about their previous date. While other users can use this application to scope out their date by reading about previous views about them. 
 
@@ -16,8 +15,6 @@ Purpose:
 [Software Demo Video](https://youtu.be/GA0dduGzslY)
 
 # Web Pages
-
-{Describe each of the web pages you created and how the web app transitions between each of them.  Also describe what is dynamically created on each page.}
 - The home page will showcase the latest reviews, providing users with recent feedback. 
 - The search tab enables users to search the database and view profiles associated with their input. 
 - The explore page presents all profiles stored in the database for users to browse. 
