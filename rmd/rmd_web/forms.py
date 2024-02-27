@@ -1,42 +1,38 @@
 # forms.py
-from .models import Post, Comment, Person
-from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.models import User
-from django.forms.widgets import PasswordInput, TextInput   
+from .models import Post, Comment, Person  # Importing models
+from django import forms  # Importing Django forms
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm  # Importing forms for user registration and authentication
+from django.contrib.auth.models import User  # Importing User model from Django's authentication system
+from django.forms.widgets import PasswordInput, TextInput  # Importing widgets for form fields
 
-# Creates a post for the date
+# Creates a form for adding a post for the date
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Post
-        fields = ['content', 'how_met']
+        model = Post  # Specifies the model to use
+        fields = ['content', 'how_met']  # Specifies the fields to include in the form
 
-# Creates a Profile for the date 
+# Creates a form for adding a profile for the date 
 class PersonForm(forms.ModelForm):
     class Meta:
-        model = Person
-        fields = ['first_name', 'last_name', 'instagram', 'joined_date']
+        model = Person  # Specifies the model to use
+        fields = ['first_name', 'last_name', 'instagram', 'joined_date']  # Specifies the fields to include in the form
         widgets = {
-            'joined_date': forms.DateInput(attrs={'type': 'date'}),
+            'joined_date': forms.DateInput(attrs={'type': 'date'}),  # Specifies the widget for the joined_date field
         }
-        # Make joined_date field optional
         required = {
-            'joined_date': False,
+            'joined_date': False,  # Makes joined_date field optional
         }
 
-        
-# Registe a user
+# Form for registering a user
 class CreateUserForm(UserCreationForm):
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
-        
-        # fields = ['first_name', 'last_name', 'email', 'phone_number', 'password1', 'password2']
+        model = User  # Specifies the model to use
+        fields = ['username', 'email', 'password1', 'password2']  # Specifies the fields to include in the form
         widgets = {
-            'password': forms.PasswordInput()
+            'password': forms.PasswordInput()  # Specifies the widget for the password field
         } 
         
-# Authenticate a User
+# Form for authenticating a User
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(widget=TextInput())
-    password = forms.CharField(widget=TextInput())
+    username = forms.CharField(widget=TextInput())  # Specifies the widget for the username field
+    password = forms.CharField(widget=TextInput())  # Specifies the widget for the password field

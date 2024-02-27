@@ -7,16 +7,16 @@ from django.contrib.auth.models import auth
 
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 
-from fire.fireconfig import Firebase
-from .models import Person,Post, Comment
-from .forms import PostForm, CreateUserForm, LoginForm, PersonForm
+from fire.fireconfig import Firebase  # Assuming this is your Firebase configuration
+from .models import Person, Post, Comment  # Importing your models
+from .forms import PostForm, CreateUserForm, LoginForm, PersonForm  # Importing forms
 
 # SEARCH 
-from django.db.models import Q
+from django.db.models import Q  # Importing Q object for complex queries
 # time
 from datetime import datetime
 from django.utils import timezone
-from django.contrib import messages
+from django.contrib import messages  # Importing messages framework for displaying messages to users
 
 import logging
 logger = logging.getLogger(__name__)
@@ -31,32 +31,29 @@ def home(request):
         'recent_posts': recent_posts  # Pass recent posts to the context
     }
     return render(request, 'home.html', context=context)
-# def home(request):
-#     context = {
-#         'user': request.user  # Pass the user object to the context
-#     }
-#     return render(request, 'home.html', context=context)
 
+# Placeholder function for handling comments
 def comment(request):
     # Your logic here
     pass
 
+# Renders the page for creating a new person profile
 def createNewPerson(request):
     context = {
         'user': request.user  # Pass the user object to the context
     }
     return render(request, 'createnewperson.html', context=context)
 
+# View function for viewing a person's profile
 @login_required
 def view_person(request, person_id):
-   
     person = get_object_or_404(Person, pk=person_id)
     recent_posts = Post.objects.filter(person=person).order_by('-created_at')
     
     if request.method == 'POST':
         post_form = PostForm(request.POST)
         if post_form.is_valid():
-            print("Form data:", request.POST)  # Print form data for debugging
+            # Process form data when submitted
             post = post_form.save(commit=False)
             post.person = person
             post.user = request.user
@@ -64,7 +61,7 @@ def view_person(request, person_id):
             messages.success(request, 'Post submitted successfully.')
             return redirect('viewperson', person_id=person_id)
         else:
-            print("Form errors:", post_form.errors)  # Print form errors for debugging
+            # Display form errors if form is invalid
             messages.error(request, 'Failed to submit post. Please check the form.')
     else:
         post_form = PostForm()
@@ -76,8 +73,8 @@ def view_person(request, person_id):
         'recent_posts': recent_posts
     }
     return render(request, 'view_person.html', context=context)
-    
-        
+
+# Handles adding comments to posts
 @login_required
 def add_comment(request):
     if request.method == 'POST':
@@ -89,7 +86,8 @@ def add_comment(request):
         comment.save()
         return JsonResponse({'success': True})
     return JsonResponse({'success': False})
-  
+
+# Renders the search results page based on user queries
 def searchPerson(request):
     query = request.GET.get('query')
     results = []
@@ -105,6 +103,7 @@ def searchPerson(request):
     }
     return render(request, 'search_results.html', context=context)
 
+# Renders the explore page, displaying all available person profiles
 def explore(request):
     persons = Person.objects.all()
     context = {
@@ -112,7 +111,6 @@ def explore(request):
         'persons': persons,
     }
     return render(request, 'explore.html', context=context)
-
 
 # CREATE A PERSON
 @login_required
@@ -125,21 +123,16 @@ def create_person(request):
             
             # Set joined_date to the current date
             current_date = timezone.now().strftime('%Y-%m-%d')
-            print("Current Date:", current_date)  # Debugging information
             person.joined_date = current_date
             
             person.save()
-            print("Person created successfully")  # Success debug message
             return redirect('viewperson', person_id=person.id)
-        else:
-            print("Form is invalid")  # Invalid form debug message
-            print(form.errors)  # Print form errors for debugging
     else:
         form = PersonForm()
     
     return render(request, 'create_person.html', {'form': form, 'current_date': timezone.now().strftime('%Y-%m-%d')})
-  
-# CREATE A REVIEW
+
+# Handles the creation of a new post associated with a person profile
 @login_required
 def create_post(request, person_id):
     if request.method == 'POST':
@@ -157,32 +150,30 @@ def create_post(request, person_id):
         form = PostForm()
     return render(request, 'create_post.html', {'form': form})
 
+# Increments the agree count for a specific comment
 def agree_comment(request, comment_id):
     comment = get_object_or_404(Comment, pk=comment_id)
     comment.agree += 1
     comment.save()
     return redirect('post_detail', post_id=comment.post_id)
 
-
-
 # AUTHENTICATION
 
+# Handles user registration
 def register(request):
-    
     form = CreateUserForm()
     
     if request.method == "POST":
         form = CreateUserForm(request.POST)
-        
         if form.is_valid():
             form.save()
-            print("Register was Successful")
             return redirect("my-login")
     
     context ={ 'registerform': form}
     
     return render(request, 'signup.html', context = context)
 
+# Handles user login
 def my_login(request):
     form = LoginForm()
     if request.method == "POST":
@@ -190,12 +181,9 @@ def my_login(request):
         if form.is_valid():
             username = request.POST.get('username')
             password = request.POST.get('password')
-            
             user = authenticate(request, username=username, password=password)
-            
             if user is not None:
                 auth_login(request, user)
-                print("User logged in successfully:", user)  # Add this line for debugging
                 return redirect("/")
             else:
                 print("Failed to authenticate user")
@@ -203,12 +191,12 @@ def my_login(request):
     context = {'loginform': form, 'user': request.user}
     return render(request, 'login.html', context=context)
 
+# Logs out the current user
 def user_logout(request) :
-    #  auth.logout(request)
     auth_logout(request)  
     return redirect('/')
-    
 
+# Renders the dashboard page
 @login_required(login_url="my-login")
 def dashboard(request):
     return render(request, 'createnewperson.html')

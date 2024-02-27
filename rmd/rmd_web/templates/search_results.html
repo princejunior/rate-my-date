@@ -9,28 +9,31 @@ Search
     <h1 class="h1-sp">Search Results</h1>
     
     {% if results %}
-    <!-- If user is found -->
+    <!-- If search results are found -->
     <div class="search-results-sp">
         <div class="user-profile-sp">
             <h3>User Profile</h3>
+            <!-- Loop through each result in the search results -->
             {% for result in results %}
             <p>Name: {{ result.first_name }} {{ result.last_name }}</p>
             <p>Instagram: {{ result.instagram }}</p>
+            <!-- Link to view the profile of the person -->
             <a href="{% url 'viewperson' result.id %}" class="view-profile-btn-sp">View Profile</a>
             {% endfor %}
         </div>
         
         <div class="previous-comments-sp">
             <h2>Previous Twitter Comment Posts</h2>
-            <!-- Display previous comment posts -->
+            <!-- Display previous comment posts if any -->
             <!-- Add more comments as needed -->
         </div>
     </div>
     {% else %}
-    <!-- If user is not found -->
+    <!-- If no search results are found -->
     <div class="not-found-sp">
         <p>No results found. Please try searching for the person's name, Instagram, or Facebook link.</p>
         <p>If still no results, you can create a profile for the person.</p>
+        <!-- Link to create a profile for the person -->
         <a href="{% url 'create_person' %}" class="create-profile-btn">Create Profile</a>
     </div>
     {% endif %}
