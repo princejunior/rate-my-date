@@ -30,7 +30,7 @@ def home(request):
         'user': request.user,  # Pass the user object to the context
         'recent_posts': recent_posts  # Pass recent posts to the context
     }
-    return render(request, 'home.html', context=context)
+    return render(request, 'pages/home.html', context=context)
 
 # Placeholder function for handling comments
 def comment(request):
@@ -42,7 +42,7 @@ def createNewPerson(request):
     context = {
         'user': request.user  # Pass the user object to the context
     }
-    return render(request, 'createnewperson.html', context=context)
+    return render(request, 'create/createnewperson.html', context=context)
 
 # View function for viewing a person's profile
 @login_required
@@ -72,7 +72,7 @@ def view_person(request, person_id):
         'post_form': post_form,
         'recent_posts': recent_posts
     }
-    return render(request, 'view_person.html', context=context)
+    return render(request, 'pages/view_person.html', context=context)
 
 # Handles adding comments to posts
 @login_required
@@ -101,7 +101,7 @@ def searchPerson(request):
         'results': results,
         'query': query
     }
-    return render(request, 'search_results.html', context=context)
+    return render(request, 'pages/search_results.html', context=context)
 
 # Renders the explore page, displaying all available person profiles
 def explore(request):
@@ -110,7 +110,7 @@ def explore(request):
         'user': request.user,  # Pass the user object to the context
         'persons': persons,
     }
-    return render(request, 'explore.html', context=context)
+    return render(request, 'pages/explore.html', context=context)
 
 # CREATE A PERSON
 @login_required
@@ -148,7 +148,7 @@ def create_post(request, person_id):
             return redirect('view_person', person_id=person_id)
     else:
         form = PostForm()
-    return render(request, 'create_post.html', {'form': form})
+    return render(request, 'create/create_post.html', {'form': form})
 
 # Increments the agree count for a specific comment
 def agree_comment(request, comment_id):
@@ -171,7 +171,7 @@ def register(request):
     
     context ={ 'registerform': form}
     
-    return render(request, 'signup.html', context = context)
+    return render(request, 'auth/signup.html', context = context)
 
 # Handles user login
 def my_login(request):
@@ -189,7 +189,7 @@ def my_login(request):
                 print("Failed to authenticate user")
 
     context = {'loginform': form, 'user': request.user}
-    return render(request, 'login.html', context=context)
+    return render(request, 'auth/ogin.html', context=context)
 
 # Logs out the current user
 def user_logout(request) :
@@ -199,4 +199,4 @@ def user_logout(request) :
 # Renders the dashboard page
 @login_required(login_url="my-login")
 def dashboard(request):
-    return render(request, 'createnewperson.html')
+    return render(request, 'create/createnewperson.html')
