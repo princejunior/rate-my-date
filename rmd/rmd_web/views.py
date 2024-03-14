@@ -30,7 +30,7 @@ def home(request):
         'user': request.user,  # Pass the user object to the context
         'recent_posts': recent_posts  # Pass recent posts to the context
     }
-    return render(request, 'pages/home.html', context=context)
+    return render(request, 'new_look/home.html', context=context)
 
 # Placeholder function for handling comments
 def comment(request):
